@@ -2,8 +2,7 @@ import numpy as np
 from sklearn import linear_model
 import pandas as pd
 from scipy import signal
-from scipy import optimize
-from scipy import integrate
+
 
 reg = linear_model.LinearRegression(fit_intercept=True)
 
@@ -70,9 +69,6 @@ def calc_doubling_rate(df_input,filter_on='confirmed'):
 
 
 if __name__ == '__main__':
-    test_data_reg=np.array([2,4,6])
-    result=get_doubling_time_via_regression(test_data_reg)
-    print('the test slope is: '+str(result))
 
     pd_JH_data=pd.read_csv('../data/processed/COVID_relational_confirmed.csv',sep=';',parse_dates=[0])
     pd_JH_data=pd_JH_data.sort_values('date',ascending=True).copy()

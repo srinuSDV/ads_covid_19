@@ -24,28 +24,7 @@ def store_relational_JH_data():
     print("Data Acquired and Stored as COVID_relational_confirmed.csv")
 
 
-def store_flat_table_JH_data():
-
-    data_path_1 = r"https://raw.githubusercontent.com/CSSEGISandData/COVID-19/" \
-                  r"master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
-    pd_raw = pd.read_csv(data_path_1)
-    time_idx = pd_raw.columns[4:]
-    df_plot = pd.DataFrame({"date": time_idx})
-    Country_list = ["Italy", "India", "US", "Germany"]
-    for each in Country_list:
-        df_plot[each] = np.array(pd_raw[pd_raw["Country/Region"] == each].iloc[:, 4::].sum(axis=0))
-
-    time_idx = [datetime.strptime(each, "%m/%d/%y") for each in df_plot.date]
-    time_str = [each.strftime('%Y-%m-%d') for each in time_idx]
-    df_plot["date"] = time_idx
-    df_plot.to_csv('../data/processed/COVID_small_flat_table.csv', sep=';', index=False)
-    print("Data Acquired and Stored as COVID_small_flat_table.csv")
-
-
-
 
 if __name__ == "__main__":
     print("Preparing data for Confirmed Covid Cases and Doubling rate Ploting... ")
     store_relational_JH_data()
-    print("Now preparing data for SIR Modelling and Ploting... ")
-    store_flat_table_JH_data()
