@@ -1,14 +1,11 @@
 import pandas as pd
 import numpy as np
-
 import dash
 dash.__version__
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output,State
-
 import plotly.graph_objects as go
-
 import os
 print(os.getcwd())
 df_input_large=pd.read_csv('../data/processed/COVID_final_set.csv',sep=';')
@@ -37,7 +34,7 @@ app.layout = html.Div([
     dcc.Dropdown(
         id='country_drop_down',
         options=[ {'label': each,'value':each} for each in df_input_large['country'].unique()],
-        value=['India', 'US','Italy'], # which are pre-selected
+        value=['India', 'US','Italy'],
         multi=True
     ),
 
